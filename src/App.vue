@@ -1,30 +1,47 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="container">
+    <global-header :user="currentUser"></global-header>
+    <column-list :list="list"></column-list>
+
   </div>
-  <router-view/>
 </template>
 
+<script lang="ts">
+  import {defineComponent} from 'vue'
+  import ColumnList, {ColumnProps} from "./components/columnlist/ColumnList.vue"
+  import 'bootstrap/dist/css/bootstrap.min.css'
+  import GlobalHeader, {UserProps} from "@/components/globalheader/GlobalHeader.vue";
+  const currentUser: UserProps = {
+    isLogin: true,
+    name: 'Evan'
+  }
+  const testData: ColumnProps[] = [
+    {
+      id: 1,
+      title: '合格証書1',
+      description: 'this is a test1',
+      avatar: 'https://cdn.favware.tech/img/tslogo.png'
+    },
+    {
+      id: 2,
+      title: '合格証書2',
+      description: 'this is a test2'
+    },
+  ]
+  export default defineComponent({
+    name: 'App',
+    components: {
+      ColumnList,
+      GlobalHeader
+    },
+    setup() {
+      return {
+        list: testData,
+        currentUser
+      }
+    }
+  })
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
