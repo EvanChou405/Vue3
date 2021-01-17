@@ -7,7 +7,11 @@
                 <li class="list-inline-item"><a href="#" class="btn btn-outline-light">新規</a></li>
             </ul>
             <ul v-else class="list-inline mb-0" style="margin-right: 18px">
-                <drop-down :title="`こんにちは ${user.name}`"></drop-down>
+                <drop-down :title="`こんにちは ${user.name}`">
+                    <drop-down-item><a href="#" class="dropdown-item">エントリー</a></drop-down-item>
+                    <drop-down-item><a href="#" class="dropdown-item">編集</a></drop-down-item>
+                    <drop-down-item><a href="#" class="dropdown-item">ログアウト</a></drop-down-item>
+                </drop-down>
             </ul>
         </nav>
     </div>
@@ -17,6 +21,7 @@
 <script lang="ts">
  import {defineComponent, PropType} from  'vue'
  import DropDown from "@/components/dropdown/DropDown.vue";
+ import DropDownItem from "@/components/dropdown/DropDownItem.vue";
  export interface UserProps {
      isLogin: boolean;
      name?: string;
@@ -25,7 +30,8 @@
  export  default defineComponent({
      name: 'GlobalHeader',
      components: {
-       DropDown
+       DropDown,
+       DropDownItem
      },
      props: {
          user: {
